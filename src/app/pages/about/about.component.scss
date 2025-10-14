@@ -6,7 +6,8 @@ $text-color: #333;
 
 .about-page {
   .about-header {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/heritage-art.jpg') no-repeat center center;
+    // THE FIX IS HERE: The path is now relative.
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/images/heritage-art.jpg') no-repeat center center;
     background-size: cover;
     color: white;
     padding: 4rem 0;
