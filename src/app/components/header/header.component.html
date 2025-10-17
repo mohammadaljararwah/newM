@@ -4,12 +4,23 @@
     <a routerLink="/about" routerLinkActive="active">نبذة عن المبرة</a>
     <a routerLink="/vision" routerLinkActive="active">الرؤيا والرسالة</a>
     <a routerLink="/goals" routerLinkActive="active">الأهداف</a>
-    <a routerLink="/brochure" routerLinkActive="active">بروشور المبرة</a>
   </nav>
 
   <div class="logo">
-    <img src="assets/images/logo.jpeg" alt="شعار المبرة" />
-    <h1>مبرة الملك حسين الخيرية</h1>
+    <div class="logo-content">
+      <img src="assets/images/logo.jpeg" alt="شعار المبرة" />
+      <h1>مبرة الملك حسين الخيرية</h1>
+    </div>
+
+    <div class="logo-tooltip">
+      <p>
+        عندما قرأت دعاء سيدنا إبراهيم عليه السلام: «فَاجْعَلْ أَفْئِدَةً مِّنَ النَّاسِ تَهْوِي إِلَيْهِمْ»، شعرت بعمق مشاعره كأب وزوج وهو يترك أحبته في وادٍ غير ذي زرع، مستودعًا إياهم عند الله، راجيًا أن تميل القلوب إليهم رحمةً وحنانًا.
+      </p>
+      <p>
+        واليوم، وأنا في خدمة مبرة الحسين للأيتام، أستحضر هذا الدعاء بصدق؛ راجيةً أن تهوي قلوب الناس إلى هؤلاء الأبناء، فيجدوا في مجتمعهم سندًا ودعمًا، وينعموا بحياة يسودها السلام والأمان والكرامة إلى آخر أعمارهم.
+      </p>
+      <p class="hashtag">#مبرة_الحسين_للأيتام 🤍</p>
+    </div>
   </div>
 
   <button class="hamburger-menu" (click)="toggleMenu()">
@@ -29,7 +40,6 @@
     <a routerLink="/about" routerLinkActive="active" (click)="toggleMenu()">نبذة عن المبرة</a>
     <a routerLink="/vision" routerLinkActive="active" (click)="toggleMenu()">الرؤيا والرسالة</a>
     <a routerLink="/goals" routerLinkActive="active" (click)="toggleMenu()">الأهداف</a>
-    <a routerLink="/brochure" routerLinkActive="active" (click)="toggleMenu()">بروشور المبرة</a>
   </nav>
 </div>
 

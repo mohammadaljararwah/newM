@@ -16,29 +16,28 @@
     padding: 0 1.5rem;
   }
 
-  // --- NEW, CORRECTED STYLES FOR THE ORG CHART ---
+  // --- NEW, CORRECTED & MORE ROBUST ORG CHART STYLES ---
   .org-chart {
-    // This is a flex container that holds the entire chart
     display: flex;
     justify-content: center;
+    padding-bottom: 3rem;
 
-    // Reset default list styles
     ul {
       list-style-type: none;
       padding: 0;
+      margin: 0;
       position: relative;
-    }
-
-    // Use Flexbox to align list items horizontally
-    ul ul {
-      display: flex;
-      justify-content: center;
     }
 
     li {
       text-align: center;
       position: relative;
-      padding: 20px 10px 0 10px;
+      padding: 20px 5px 0 5px;
+    }
+    
+    // Use Flexbox to lay out children horizontally
+    ul ul {
+      display: flex;
     }
 
     // The box containing the title
@@ -50,11 +49,10 @@
       display: inline-block;
       min-width: 180px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: relative; // Needed for line connections
+      position: relative;
       z-index: 1;
     }
 
-    // Style the different levels of nodes
     .board {
       background-color: $primary-color;
       color: white;
@@ -67,59 +65,67 @@
     }
 
     // --- Drawing the connecting lines ---
-
-    // Vertical line coming DOWN from a node
-    .node::after {
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 20px;
-      background-color: $secondary-color;
-    }
-
-    // Hide the downward line for the last level of nodes
-    ul ul > li > .node::after {
-      display: none;
-    }
-
-    // Horizontal line CONNECTING children nodes
-    li li::before {
+    
+    // Connector from parent to children
+    li::after {
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: $secondary-color;
+      bottom: 0;
+      right: 50%; // For RTL
+      border-right: 2px solid $secondary-color; // For RTL
     }
 
-    // Vertical line going UP from a child node to the horizontal line
-    li li::after {
+    // Horizontal line above a group of children
+    ul ul::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%; // For RTL
+      border-top: 2px solid $secondary-color;
+      width: 0;
+      height: 20px;
+    }
+
+    // Line from parent down to the horizontal line
+    li > .node::before {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: 50%; // For RTL
+      border-right: 2px solid $secondary-color; // For RTL
+      height: 20px;
+    }
+
+    // Horizontal line for each child, connecting to the vertical line
+    li > .node::after {
       content: '';
       position: absolute;
       top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 20px;
-      background-color: $secondary-color;
+      right: 50%; // For RTL
+      border-top: 2px solid $secondary-color;
+      width: 100%;
+      transform: translateX(50%); // For RTL
+    }
+    
+    // Remove unnecessary lines for clarity
+    ul > li > .node::before, ul > li > .node::after {
+      display: none; // Hide on root node
+    }
+    li:only-child > .node::after {
+        width: 0; // No horizontal line for a single child
     }
 
-    // Clean up lines for single children
-    li:only-child::before, li:only-child::after {
-      display: none;
-    }
-
-    // Clean up lines for the first and last child in a group
-    li:first-child:before {
-      left: 50%;
+    // Adjust lines for the first and last children in a group
+    li:first-child > .node::after {
       width: 50%;
+      transform: translateX(100%);
     }
-    li:last-child:before {
+    li:last-child > .node::after {
       width: 50%;
+      right: auto;
+      left: 0;
+      transform: translateX(0);
     }
   }
 }

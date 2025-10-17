@@ -1,124 +1,272 @@
+@import '../../../styles-variables.scss';
+
+// --- Keyframes for Animations ---
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Animation for the news ticker
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    // Scrolls up by the height of the original list (4 items * 81px height)
+    transform: translateY(calc(-4 * 81px));
+  }
+}
+
+
+// --- Component Styles ---
+
 .hero {
   position: relative;
-  height: 70vh;
-  color: white;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 60vh; // A bit taller for a more impactful look
+  min-height: 400px;
   overflow: hidden;
 
   .hero-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1;
-  }
-
-  &::before {
-    content: "";
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 20, 50, 0.6);
   }
 }
 
-// Styling for the new navigation bar with icons
 .quick-nav {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  background-color: #f0f8ff;
-  border-bottom: 3px solid #005a9e;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2.5rem 1rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+  gap: 1.5rem;
 
-  a {
-    // New styles for centering icon and text vertically
+  .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0.75rem; // Space between icon and text
-
-    padding: 1.5rem 1rem;
-    text-align: center;
-    color: #003366;
     text-decoration: none;
+    color: $primary-color;
     font-weight: 600;
     font-size: 0.9rem;
-    border-left: 1px solid #d4e8f7;
-    transition: background-color 0.3s;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
 
-    &:first-child {
-      border-right: 1px solid #d4e8f7;
+    .icon-wrapper {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 5px 20px rgba(0, 51, 102, 0.1);
+      margin-bottom: 0.75rem;
+      transition: transform 0.6s, box-shadow 0.3s;
+      transform-style: preserve-3d; // Enable 3D transformations
+
+      i {
+        font-size: 2rem;
+        color: $secondary-color;
+      }
     }
+
+    &:hover .icon-wrapper {
+      transform: rotateY(360deg) scale(1.1); // 3D rotation and slight zoom
+      box-shadow: 0 8px 25px rgba(0, 51, 102, 0.2);
+    }
+  }
+}
+
+.content-section {
+  padding: 5rem 0;
+  overflow: hidden; // Hides elements before they animate in
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    direction: rtl;
+    text-align: right;
+    // Apply entry animation to all containers
+    animation: slideInUp 0.8s ease-out forwards;
+    opacity: 0; // Start hidden
+  }
+
+  h2 {
+    color: $primary-color;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  p {
+    line-height: 1.9;
+    color: #555;
+    font-size: 1.1rem;
+    text-align: justify;
+    margin: 0 auto 1rem auto;
+    max-width: 800px; // Center and constrain paragraph width for readability
+  }
+}
+
+// --- New Statistics Section ---
+.quick-facts-section {
+  background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 90, 158, 0.85)), url('../../../assets/images/heritage-art.jpg') no-repeat top center;
+  background-size: cover;
+  background-attachment: fixed; // Parallax effect
+  padding: 5rem 0;
+  color: white;
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .fact-item {
+    text-align: center;
+    .fact-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #00b4ff;
+    }
+    .fact-number {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    .fact-label {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+    }
+  }
+}
+
+// --- New News Ticker Section ---
+#news.content-section {
+  .news-ticker-container {
+    height: 324px; // Height for 4 items (4 * 81px)
+    overflow: hidden;
+    position: relative;
+    background: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+    max-width: 800px;
+    margin: 2rem auto 0 auto;
+    
+    // Gradient overlay for fade effect
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(to top, white, rgba(255,255,255,0));
+    }
+  }
+
+  .news-ticker {
+    // Apply the scrolling animation
+    animation: scroll-up 20s linear infinite;
 
     &:hover {
-      background-color: #e0f3ff;
-      color: #005a9e;
+      animation-play-state: paused; // Pause animation on hover
     }
+  }
 
-    // Icon styling
-    i {
-      font-size: 2rem; // Make the icon larger
-      color: #005a9e;
+  .announcement-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    height: 80px;
+    border-bottom: 1px solid #eee;
+
+    .announcement-date {
+      flex-shrink: 0;
+      text-align: center;
+      color: $secondary-color;
+      font-weight: bold;
+      .day {
+        font-size: 1.8rem;
+        display: block;
+        line-height: 1;
+      }
+      .month {
+        font-size: 0.9rem;
+      }
+    }
+    .announcement-text {
+      color: $text-color;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: color 0.3s;
+      &:hover {
+        color: $secondary-color;
+      }
     }
   }
 }
 
-// Styling for the content sections
-.content-section {
-  padding: 5rem 2rem;
-  text-align: center;
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-
-    h2 {
-      color: #003366;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #333;
-    }
-  }
-}
-// Add this at the end of the file
-.map-container {
-  border-radius: 10px;
-  overflow: hidden;
-  border: 2px solid #005a9e;
-  box-shadow: 0 4px 15px rgba(0, 51, 102, 0.1);
-}
-// Add these styles to the end of home.component.scss
-#faq .container {
-  text-align: right;
+// --- Polished FAQ Section ---
+#faq.content-section {
   .faq-item {
-    background-color: #f9f9f9;
-    padding: 1.5rem;
+    background-color: white;
+    padding: 1.5rem 2rem;
     border-radius: 8px;
-    margin-bottom: 1rem;
-    border-right: 4px solid #005a9e;
+    margin: 1rem auto;
+    max-width: 800px;
+    border-right: 5px solid $secondary-color;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    
     h4 {
       margin: 0 0 0.5rem 0;
-      color: #003366;
+      color: $primary-color;
       font-size: 1.3rem;
     }
     p {
       margin: 0;
-      font-size: 1.05rem;
-      line-height: 1.7;
+      max-width: 100%; // Override centered paragraph style
+      text-align: right;
     }
+  }
+}
+
+// --- Map Section ---
+#map.content-section {
+  padding-bottom: 0;
+  .map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 1100px;
+    margin: 0 auto;
+    border: 2px solid #eee;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .content-section {
+    padding: 3rem 0;
   }
 }
