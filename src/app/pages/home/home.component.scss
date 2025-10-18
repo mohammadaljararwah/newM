@@ -123,11 +123,40 @@
   }
 }
 
+// New Brochure Button Styles
+.brochure-button-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: $secondary-color;
+  color: white;
+  padding: 0.8rem 1.8rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  
+  i {
+    margin-right: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+    transform: translateY(-3px);
+    
+    i {
+      transform: translateY(2px);
+    }
+  }
+}
+
 // --- New Statistics Section ---
 .quick-facts-section {
-  background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 90, 158, 0.85)), url('../../../assets/images/heritage-art.jpg') no-repeat top center;
-  background-size: cover;
-  background-attachment: fixed; // Parallax effect
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
   padding: 5rem 0;
   color: white;
 
@@ -142,7 +171,7 @@
     .fact-icon {
       font-size: 3rem;
       margin-bottom: 1rem;
-      color: #00b4ff;
+      color: #00b4ff; // A bright accent color
     }
     .fact-number {
       font-size: 3rem;
@@ -151,6 +180,81 @@
     .fact-label {
       font-size: 1.1rem;
       color: #e0e0e0;
+    }
+  }
+}
+
+// --- Image Carousel Section ---
+.image-carousel-section {
+  padding: 5rem 0;
+  background-color: #f8f9fa;
+  text-align: center;
+
+  .container {
+    max-width: 900px; // Slightly narrower for the carousel
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    direction: rtl;
+    animation: slideInUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  h2 {
+    color: $primary-color;
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+    max-width: 800px;
+    height: 450px; // Fixed height for carousel images
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .carousel-slide {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    .carousel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // Cover the area, zoom if needed
+      position: absolute; // Layer images on top of each other
+      opacity: 0;
+      transition: opacity 1s ease-in-out; // Fade transition
+      
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+
+      &.active, &:hover {
+        background-color: white;
+        transform: scale(1.2);
+      }
     }
   }
 }
@@ -266,7 +370,14 @@
 
 // Responsive adjustments
 @media (max-width: 768px) {
+  .hero {
+    height: 40vh;
+    min-height: 250px;
+  }
   .content-section {
     padding: 3rem 0;
+  }
+  .image-carousel-section .carousel-wrapper {
+    height: 300px;
   }
 }

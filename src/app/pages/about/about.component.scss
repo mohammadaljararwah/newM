@@ -1,12 +1,7 @@
-// Use the main theme colors
-$primary-color: #003366;
-$secondary-color: #005a9e;
-$light-bg: #f8f9fa;
-$text-color: #333;
+@import '../../../styles-variables.scss';
 
 .about-page {
   .about-header {
-    // THE FIX IS HERE: The path is now relative.
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../assets/images/heritage-art.jpg') no-repeat top center;
     background-size: cover;
     color: white;
@@ -34,7 +29,7 @@ $text-color: #333;
   }
 
   .content-body {
-    section {
+    section:not(.services-section) {
       display: flex;
       align-items: center;
       gap: 3rem;
@@ -45,7 +40,6 @@ $text-color: #333;
         border-bottom: 1px solid #e0e0e0;
       }
 
-      // Reverse layout for even sections
       &:nth-child(even) {
         flex-direction: row-reverse;
       }
@@ -66,30 +60,88 @@ $text-color: #333;
         }
       }
 
-.image-content {
-  flex: 1;
-  img {
-    width: 100%;
-    height: 400px; // Fixed height to create a "window"
-    object-fit: cover; // Scales the image to cover the area
-    object-position: top center; // THIS IS THE KEY: Focuses on the top part
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-}
+      .image-content {
+        flex: 1;
+        position: relative;
+
+        // THIS IS THE MISSING STYLE THAT FIXES THE GIANT STATIC IMAGES
+        img {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+          object-position: top center;
+          border-radius: 10px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      // --- Carousel Styles for About Page ---
+      .carousel-wrapper-about {
+        max-width: 100%;
+        height: 400px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        position: relative;
+      }
+
+      .carousel-slide-about {
+        display: flex;
+        width: 100%;
+        height: 100%;
+
+        .carousel-img-about {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          position: absolute;
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+          
+          &.active {
+            opacity: 1;
+          }
+        }
+      }
+
+      .carousel-dots-about {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.5rem;
+        z-index: 10;
+
+        .dot-about {
+          width: 12px;
+          height: 12px;
+          background-color: rgba(255, 255, 255, 0.6);
+          border-radius: 50%;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+
+          &.active, &:hover {
+            background-color: white;
+            transform: scale(1.2);
+          }
+        }
+      }
     }
 
     .services-section {
-      display: block; // This section will not be a flexbox row
+      display: block;
       text-align: center;
       background-color: $light-bg;
       padding: 3rem;
       border-radius: 10px;
+      margin-top: 3rem;
 
       h2 {
         border: none;
         padding: 0;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
       }
       p {
         margin-bottom: 2rem;
@@ -102,19 +154,56 @@ $text-color: #333;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1.5rem;
         text-align: right;
+
         li {
           background: white;
           padding: 1.5rem;
           border-radius: 8px;
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          font-size: 1.05rem;
+          cursor: pointer;
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-          i {
-            color: $secondary-color;
-            font-size: 1.8rem;
+          .card-visible-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            i {
+              color: $secondary-color;
+              font-size: 2.2rem;
+            }
+
+            h3 {
+              color: $primary-color;
+              font-size: 1.2rem;
+              margin: 0;
+            }
+          }
+
+          .card-hidden-content {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease-in, margin-top 0.4s ease-out;
+
+            p {
+              font-size: 0.95rem;
+              line-height: 1.7;
+              color: $text-color;
+              margin: 0;
+              padding-top: 1rem;
+            }
+          }
+
+          &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 51, 102, 0.15);
+
+            .card-hidden-content {
+              max-height: 150px;
+              opacity: 1;
+              margin-top: 0.5rem;
+            }
           }
         }
       }
@@ -123,9 +212,14 @@ $text-color: #333;
 
   // Responsive adjustments for mobile
   @media (max-width: 768px) {
-    .content-body section {
-      flex-direction: column !important; // Stack text and image on mobile
+    .content-body section:not(.services-section) {
+      flex-direction: column !important;
       gap: 2rem;
+    }
+    
+    .content-body .image-content img,
+    .content-body .carousel-wrapper-about {
+      height: 250px;
     }
   }
 }

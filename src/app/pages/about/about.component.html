@@ -22,13 +22,22 @@
     <hr>
 
     <section class="history-section">
-      <div class="image-content">
-        <img src="assets/images/king-abdullah-visit.jpg" alt="زيارة جلالة الملك عبدالله الثاني للمبرة">
+      <div class="image-content carousel-wrapper-about">
+        <div class="carousel-slide-about">
+          <img src="assets/images/king-abdullah-visit.jpg" alt="زيارة جلالة الملك عبدالله الثاني للمبرة" class="carousel-img-about active" />
+          <img src="https://picsum.photos/800/600?grayscale&random=2" alt="صورة أرشيفية" class="carousel-img-about" />
+          <img src="https://picsum.photos/800/600?grayscale&random=3" alt="صورة أرشيفية أخرى" class="carousel-img-about" />
+        </div>
+        <div class="carousel-dots-about">
+          <span class="dot-about active" (click)="goToSlideKing(0)"></span>
+          <span class="dot-about" (click)="goToSlideKing(1)"></span>
+          <span class="dot-about" (click)="goToSlideKing(2)"></span>
+        </div>
       </div>
       <div class="text-content">
         <h2>تاريخنا: جذور راسخة ورعاية ملكية سامية</h2>
         <p>
-          تأسست المبرة بإرادة خيرة من أبناء المجتمع المحلي، وسرعان ما حظيت بدعم واهتمام كبيرين. إن اسم "مبرة الملك حسين" لم يأتِ من فراغ، بل هو دليل على الرعاية والاهتمام الذي يوليه الهاشميون لهذه الفئة الغالية على قلوبنا جميعاً، وهو نهج مستمر ومتجذر في قيادتنا الحكيمة. تجسد هذه الصورة زيارة جلالة الملك عبدالله الثاني، وهي شهادة على استمرارية هذا الإرث الإنساني العظيم.
+          تأسست المبرة بإرادة خيرة من أبناء المجتمع المحلي، وسرعان ما حظيت بدعم واهتمام كبيرين. إن اسم "مبرة الملك حسين" لم يأتِ من فراغ، بل هو دليل على الرعاية والاهتمام الذي يوليه الهاشميون لهذه الفئة الغالية على قلوبنا جميعاً، وهو نهج مستمر ومتجذر في قيادتنا الحكيمة. تجسد هذه الصور زيارات جلالة الملك عبدالله الثاني، وهي شهادة على استمرارية هذا الإرث الإنساني العظيم.
         </p>
       </div>
     </section>
@@ -43,6 +52,7 @@
         </p>
       </div>
       <div class="image-content">
+        <img src="assets/images/mabarra-team.jpg" alt="فريق عمل ومتطوعي مبرة الملك حسين">
       </div>
     </section>
 
@@ -52,10 +62,42 @@
         <h2>خدماتنا: رعاية شاملة لمستقبل واعد</h2>
         <p>نؤمن بأن رعاية اليتيم هي استثمار في مستقبل الوطن. لذلك، تشمل خدماتنا:</p>
         <ul>
-            <li><i class="fa-solid fa-house-user"></i> <strong>الإيواء الكامل:</strong> توفير مسكن آمن ومريح ضمن بيئة أسرية.</li>
-            <li><i class="fa-solid fa-book-open-reader"></i> <strong>التعليم والدعم الأكاديمي:</strong> الحرص على متابعة التحصيل العلمي للأبناء.</li>
-            <li><i class="fa-solid fa-heart-pulse"></i> <strong>الرعاية الصحية والنفسية:</strong> متابعة صحية دورية وتقديم الدعم النفسي والاجتماعي.</li>
-            <li><i class="fa-solid fa-users"></i> <strong>التطوير الثقافي والاجتماعي:</strong> بناء وتطوير معارف وقدرات الأبناء.</li>
+            <li>
+                <div class="card-visible-content">
+                    <i class="fa-solid fa-house-user"></i>
+                    <h3>الإيواء الكامل</h3>
+                </div>
+                <div class="card-hidden-content">
+                    <p>توفير مسكن آمن ومريح ضمن بيئة أسرية متكاملة تضمن لهم الاستقرار والأمان.</p>
+                </div>
+            </li>
+            <li>
+                <div class="card-visible-content">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <h3>التعليم والدعم الأكاديمي</h3>
+                </div>
+                <div class="card-hidden-content">
+                    <p>الحرص على متابعة التحصيل العلمي للأبناء وتوفير كل ما يلزمهم للتفوق الدراسي.</p>
+                </div>
+            </li>
+            <li>
+                <div class="card-visible-content">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <h3>الرعاية الصحية والنفسية</h3>
+                </div>
+                <div class="card-hidden-content">
+                    <p>متابعة صحية دورية وتقديم الدعم النفسي والإرشاد الاجتماعي لبناء شخصية متوازنة.</p>
+                </div>
+            </li>
+            <li>
+                <div class="card-visible-content">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>التطوير الثقافي والاجتماعي</h3>
+                </div>
+                <div class="card-hidden-content">
+                    <p>بناء وتطوير معارف وقدرات الأبناء في مختلف المجالات ودمجهم في المجتمع.</p>
+                </div>
+            </li>
         </ul>
     </section>
   </main>
